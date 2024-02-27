@@ -8,14 +8,39 @@ import org.json.JSONObject;
 public class ClienteCorporativo extends Cliente
 {
     // TODO completar
+	/**
+	 * Un String de Cliente CORPORATIVO, se inicializa en "Corporativo".
+	 */
 	public String CORPORATIVO = "Corporativo";
+	
+	/**
+	 * Un int que representa una empresa GRANDE, se inicializa en 1.
+	 */
 	public int GRANDE = 1;
+
+	/**
+	 * Un int que representa una empresa MEDIANA, se inicializa en 2.
+	 */
 	public int MEDIANA = 2;
+	
+	/**
+	 * Un int que representa una empresa PEQUENA, se inicializa en 3.
+	 */
 	public int PEQUENA = 3;
+	
+	/**
+	 * Un String con el Nombre de la Empresa.
+	 */
 	private String nombreEmpresa;
+	
+	/**
+	 * Un int con el Tamaño de la Empresa.
+	 */
 	private int tamanoEmpresa;
 	
-	
+	/**
+     * Constructor de la clase ClienteCorporativo.
+     */
     public ClienteCorporativo(String nombreEmpresa, int tamanoEmpresa) 
     {
 		this.nombreEmpresa = nombreEmpresa;
@@ -23,7 +48,7 @@ public class ClienteCorporativo extends Cliente
 	}
 
 	/**
-	 * @return the nombreEmpresa
+	 * @return El nombre de la Empresa.
 	 */
 	public String getNombreEmpresa() 
 	{
@@ -31,18 +56,26 @@ public class ClienteCorporativo extends Cliente
 	}
 
 	/**
-	 * @return the tamanoEmpresa
+	 * @return El tamaño de la Empresa.
 	 */
 	public int getTamanoEmpresa() 
 	{
 		return tamanoEmpresa;
 	}
 	
+	/**
+	 * 
+	 * @return El tipo de Cliente.
+	 */
 	public String getTipoCliente()
 	{
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return El identificador del Cliente.
+	 */
 	public String getIdentificador()
 	{
 		return null;
