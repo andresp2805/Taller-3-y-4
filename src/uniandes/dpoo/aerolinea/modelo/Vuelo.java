@@ -79,6 +79,11 @@ public class Vuelo
 		return -1;
 	}
 	
+	/**
+	 * 
+	 * @param Objeto a comparar
+	 * @return true si el objeto es igual a otro false de lo contrario.
+	 */
 	public boolean equals(Object obj)
 	{
 		return false;

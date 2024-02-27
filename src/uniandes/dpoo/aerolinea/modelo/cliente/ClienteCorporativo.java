@@ -8,17 +8,16 @@ import org.json.JSONObject;
 public class ClienteCorporativo extends Cliente
 {
     // TODO completar
-	private String CORPORATIVO = "Corporativo";
-	private int GRANDE = 1;
-	private int MEDIANA = 2;
-	private int PEQUENA = 3;
+	public String CORPORATIVO = "Corporativo";
+	public int GRANDE = 1;
+	public int MEDIANA = 2;
+	public int PEQUENA = 3;
 	private String nombreEmpresa;
 	private int tamanoEmpresa;
 	
 	
     public ClienteCorporativo(String nombreEmpresa, int tamanoEmpresa) 
     {
-		super();
 		this.nombreEmpresa = nombreEmpresa;
 		this.tamanoEmpresa = tamanoEmpresa;
 	}

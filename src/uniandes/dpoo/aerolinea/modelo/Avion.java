@@ -1,6 +1,7 @@
 package uniandes.dpoo.aerolinea.modelo;
 
-public class Avion {
+public class Avion 
+{
 	
 	/**
      * Un String con el nombre del Avion.

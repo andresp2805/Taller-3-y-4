@@ -1,5 +1,6 @@
 package uniandes.dpoo.aerolinea.modelo.tarifas;
 
+import uniandes.dpoo.aerolinea.modelo.Ruta;
 import uniandes.dpoo.aerolinea.modelo.Vuelo;
 import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
 
@@ -33,8 +34,8 @@ public abstract class CalculadoraTarifas
 	
 	/**
 	 * 
-	 * @param Vuelo al que se le va a calcular la tarifa.
-	 * @param Cliente al que se le va a calcular la tarifa.
+	 * @param Vuelo al que se le va a calcular el costo base.
+	 * @param Cliente al que se le va a calcular el costo base.
 	 * @return Costo Base.
 	 */
 	protected int calcularCostoBase(Vuelo vuelo, Cliente cliente)
@@ -42,7 +43,32 @@ public abstract class CalculadoraTarifas
 		return -1;
 	}
 	
+	/**
+	 * 
+	 * @param Cliente al que se le va a calcular porcentaje de descuento.
+	 * @return El Porcentaje de Descuento
+	 */
 	protected double calcularPorcentajeDescuento(Cliente cliente)
+	{
+		return -1;
+	}
+	
+	/**
+	 * 
+	 * @param Ruta al que se le va a calcular la distancia.
+	 * @return Distancia del Vuelo.
+	 */
+	protected int calcularDistanciaVuelo(Ruta ruta)
+	{
+		return -1;
+	}
+	
+	/**
+	 * 
+	 * @param Costo Base 
+	 * @return Valor de los impuestos
+	 */
+	protected int ValorImpuestos(int costoBase)
 	{
 		return -1;
 	}
