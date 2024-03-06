@@ -88,7 +88,17 @@ public class Ruta
 	 */
 	public int getDuracion()
 	{
-		return -1;
+		int minutosSalida = getMinutos(horaSalida);
+		int horasSalida = getHoras(horaSalida);
+		
+		int minutosLlegada = getMinutos(horaLlegada);
+		int horasLlegada = getHoras(horaLlegada);
+		
+		int salida = minutosSalida + horasSalida * 60;
+		int llegada = minutosLlegada + horasLlegada * 60;
+		
+		int duracion = salida - llegada;
+		return duracion;
 	}
 	
 	/**

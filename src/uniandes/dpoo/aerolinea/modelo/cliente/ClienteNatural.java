@@ -25,7 +25,7 @@ public class ClienteNatural extends Cliente
 	 */
 	public String getTipoCliente()
 	{
-		return null;
+		return NATURAL;
 	}
 	
 	/**
@@ -34,6 +34,7 @@ public class ClienteNatural extends Cliente
 	 */
 	public String getIdentificador()
 	{
-		return null;
+		String identificador = NATURAL+"."+this.nombre;
+		return identificador;
 	}
 }

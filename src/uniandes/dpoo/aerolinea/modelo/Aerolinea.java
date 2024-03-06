@@ -164,6 +164,15 @@ public class Aerolinea
     public Vuelo getVuelo( String codigoRuta, String fechaVuelo )
     {
         // TODO implementar
+    	for (int i = 0; i < this.vuelos.size() ;i++)
+    	{
+    		String fecha = this.vuelos.get(i).getFecha();
+    		String codigo = this.vuelos.get(i).getRuta().getCodigoRuta();
+    		if (fecha == fechaVuelo && codigo == codigoRuta)
+    		{
+    			return this.vuelos.get(i);
+    		}
+    	}
         return null;
     }
 
@@ -183,8 +192,16 @@ public class Aerolinea
     public Collection<Tiquete> getTiquetes( )
     {
         // TODO implementar
-        return null;
-
+    	ArrayList<Tiquete> listaTiquetes = new ArrayList<Tiquete>();
+    	for (int i = 0; i < this.vuelos.size() ;i++)
+    	{
+    		ArrayList<Tiquete> listaTiquetesVuelo = (ArrayList<Tiquete>) this.vuelos.get(i).getTiquetes();
+    		for (int j = 0; j < listaTiquetesVuelo.size(); i++)
+    		{
+    			listaTiquetes.add(listaTiquetesVuelo.get(j));
+    		}
+    	}
+        return (Collection<Tiquete>) listaTiquetes;
     }
 
     // ************************************************************************************

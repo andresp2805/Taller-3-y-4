@@ -22,27 +22,20 @@ public abstract class Cliente
      * Constructor de la clase Cliente.
      */
 	public Cliente() {
-		tiquetesSinUsar = new ArrayList<Tiquete>( );
-		tiquetesUsados = new ArrayList<Tiquete>( );
+		
 	}
 	
 	/**
 	 * 
 	 * @return El tipo de Cliente.
 	 */
-	public String getTipoCliente()
-	{
-		return null;
-	}
+	public abstract String getTipoCliente();
 	
 	/**
 	 * 
 	 * @return El identificador del Cliente.
 	 */
-	public String getIdentificador()
-	{
-		return null;
-	}
+	public abstract String getIdentificador();
 	
 	/**
 	 * Agrega un Tiquete a la lista de tiquetes.
@@ -50,16 +43,21 @@ public abstract class Cliente
 	 */
 	public void agregarTiquete(Tiquete tiquete)
 	{
-		
+		tiquetesSinUsar.add(tiquete);
 	}
 	
 	/**
 	 * 
-	 * @return
+	 * @return Calcula el valor total de los tiquetes que ha comprado un cliente
 	 */
 	public int calcularValorTotalTiquetes()
 	{
-		return -1;
+		int total = 0;
+		for (int i = 0; i < this.tiquetesSinUsar.size(); i++)
+		{
+			total += this.tiquetesSinUsar.get(i).getTarifa();
+		}
+		return total;
 	}
 	
 	/**
@@ -69,6 +67,15 @@ public abstract class Cliente
 	 */
 	public void usarTiquetes(Vuelo vuelo)
 	{
-		
+		ArrayList<Tiquete> tiquetesVuelo = (ArrayList<Tiquete>) vuelo.getTiquetes();
+		for (int i = 0; i < tiquetesVuelo.size(); i++)
+		{
+			if(tiquetesSinUsar.contains(tiquetesVuelo.get(i)))
+			{
+				tiquetesVuelo.get(i).marcarComoUsado();
+				tiquetesSinUsar.remove(tiquetesVuelo.get(i));
+				tiquetesUsados.add(tiquetesVuelo.get(i));
+			}
+		}
 	}
 }

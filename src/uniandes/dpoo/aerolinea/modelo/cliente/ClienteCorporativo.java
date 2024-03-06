@@ -69,7 +69,7 @@ public class ClienteCorporativo extends Cliente
 	 */
 	public String getTipoCliente()
 	{
-		return null;
+		return CORPORATIVO;
 	}
 	
 	/**
@@ -78,7 +78,21 @@ public class ClienteCorporativo extends Cliente
 	 */
 	public String getIdentificador()
 	{
-		return null;
+		String identificador = "";
+		if (this.tamanoEmpresa == GRANDE)
+		{
+			identificador += "GRANDE.";
+		}
+		else if (this.tamanoEmpresa == MEDIANA)
+		{
+			identificador += "MEDIANA.";
+		}
+		else if (this.tamanoEmpresa == PEQUENA)
+		{
+			identificador += "PEQUENA.";
+		}
+		identificador += CORPORATIVO+"."+this.nombreEmpresa;
+		return identificador;
 	}
 	
 	/**
