@@ -1,5 +1,7 @@
 package uniandes.dpoo.aerolinea.modelo.tarifas;
 
+import uniandes.dpoo.aerolinea.modelo.Aeropuerto;
+import uniandes.dpoo.aerolinea.modelo.Ruta;
 import uniandes.dpoo.aerolinea.modelo.Vuelo;
 import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
 
@@ -38,7 +40,22 @@ public class CalculadoraTarifasTemporadaBaja extends CalculadoraTarifas
 	 */
 	public int calcularCostoBase(Vuelo vuelo, Cliente cliente)
 	{
-		return -1;
+		String tipoCliente = cliente.getTipoCliente();
+		Ruta ruta = vuelo.getRuta();
+		Aeropuerto origen = ruta.getOrigen();
+		Aeropuerto destino = ruta.getDestino();
+		int distancia = Aeropuerto.calcularDistancia(origen, destino);
+		int costoBase = 0;
+		if (tipoCliente == "Natural")
+		{
+			costoBase = distancia * COSTO_POR_KM_NATURAL;
+		}
+		else
+		{
+			costoBase = distancia * COSTO_POR_KM_CORPORATIVO;
+
+		}
+		return costoBase;
 	}
 	
 	/**
@@ -48,6 +65,26 @@ public class CalculadoraTarifasTemporadaBaja extends CalculadoraTarifas
 	 */
 	public double calcularPorcentajeDescuento(Cliente cliente)
 	{
-		return -1;
+		String tipoCliente = cliente.getTipoCliente();
+		double descuento = 0;
+		if(tipoCliente == "Corporativo")
+		{
+			String id = cliente.getIdentificador();
+			String[] array = id.split(".");
+			String tamañoeEmpresa = array[0];
+			if (tamañoeEmpresa == "GRANDE")
+			{
+				descuento = this.DESCUENTO_GRANDES;
+			}
+			else if (tamañoeEmpresa == "MEDIANA")
+			{
+				descuento = this.DESCUENTO_MEDIANAS;
+			}
+			else if (tamañoeEmpresa == "PEQUENA")
+			{
+				descuento = this.DESCUENTO_PEQ;
+			}
+		}
+		return descuento;
 	}
 }

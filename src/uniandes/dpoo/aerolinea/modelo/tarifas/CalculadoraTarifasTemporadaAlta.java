@@ -1,7 +1,10 @@
 package uniandes.dpoo.aerolinea.modelo.tarifas;
 
+import uniandes.dpoo.aerolinea.modelo.Aeropuerto;
+import uniandes.dpoo.aerolinea.modelo.Ruta;
 import uniandes.dpoo.aerolinea.modelo.Vuelo;
 import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
+import uniandes.dpoo.aerolinea.modelo.cliente.ClienteCorporativo;
 
 public class CalculadoraTarifasTemporadaAlta extends CalculadoraTarifas
 {
@@ -18,7 +21,12 @@ public class CalculadoraTarifasTemporadaAlta extends CalculadoraTarifas
 	 */
 	public int calcularCostoBase(Vuelo vuelo, Cliente cliente)
 	{
-		return -1;
+		Ruta ruta = vuelo.getRuta();
+		Aeropuerto origen = ruta.getOrigen();
+		Aeropuerto destino = ruta.getDestino();
+		int distancia = Aeropuerto.calcularDistancia(origen, destino);
+		int costoBase = distancia * COSTO_POR_KM;
+		return costoBase;
 	}
 	
 	/**
@@ -28,6 +36,6 @@ public class CalculadoraTarifasTemporadaAlta extends CalculadoraTarifas
 	 */
 	public double calcularPorcentajeDescuento(Cliente cliente)
 	{
-		return -1;
+		return 0;
 	}
 }

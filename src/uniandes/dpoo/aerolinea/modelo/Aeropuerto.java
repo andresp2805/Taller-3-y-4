@@ -65,7 +65,7 @@ public class Aeropuerto
 	 */
 	public String getNombre() 
 	{
-		return nombre;
+		return this.nombre;
 	}
 
 	/**
@@ -73,7 +73,7 @@ public class Aeropuerto
 	 */
 	public String getCodigo() 
 	{
-		return codigo;
+		return this.codigo;
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class Aeropuerto
 	 */
 	public String getNombreCiudad() 
 	{
-		return nombreCiudad;
+		return this.nombreCiudad;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class Aeropuerto
 	 */
 	public double getLatitud() 
 	{
-		return latitud;
+		return this.latitud;
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class Aeropuerto
 	 */
 	public double getLongitud() 
 	{
-		return longitud;
+		return this.longitud;
 	}
 	
 	/**

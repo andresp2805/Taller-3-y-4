@@ -12,6 +12,7 @@ import java.util.Map;
 import uniandes.dpoo.aerolinea.exceptions.InformacionInconsistenteException;
 import uniandes.dpoo.aerolinea.exceptions.VueloSobrevendidoException;
 import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
+import uniandes.dpoo.aerolinea.modelo.tarifas.CalculadoraTarifas;
 import uniandes.dpoo.aerolinea.persistencia.CentralPersistencia;
 import uniandes.dpoo.aerolinea.persistencia.IPersistenciaAerolinea;
 import uniandes.dpoo.aerolinea.persistencia.IPersistenciaTiquetes;
@@ -221,6 +222,8 @@ public class Aerolinea
     public void cargarAerolinea( String archivo, String tipoArchivo ) throws TipoInvalidoException, IOException, InformacionInconsistenteException
     {
         // TODO implementar
+    	IPersistenciaAerolinea cargador = CentralPersistencia.getPersistenciaAerolinea( tipoArchivo );
+        cargador.cargarAerolinea( archivo, this );
     }
 
     /**
@@ -233,6 +236,8 @@ public class Aerolinea
     public void salvarAerolinea( String archivo, String tipoArchivo ) throws TipoInvalidoException, IOException
     {
         // TODO implementar
+    	IPersistenciaAerolinea cargador = CentralPersistencia.getPersistenciaAerolinea( tipoArchivo );
+    	cargador.salvarAerolinea( archivo, this );
     }
 
     /**
@@ -283,6 +288,33 @@ public class Aerolinea
     public void programarVuelo( String fecha, String codigoRuta, String nombreAvion ) throws Exception
     {
         // TODO Implementar el método
+    	Ruta ruta = getRuta(codigoRuta);
+    	Avion avion = null;
+    	for (int i = 0; i < vuelos.size(); i++)
+    	{
+    		Avion avion1 = vuelos.get(i).getAvion();
+    		if (avion.getNombre() == nombreAvion)
+    		{
+    			avion = avion1;
+    		}
+    		int horaSalida = Integer.parseInt(ruta.getHoraSalida());
+    		int horaLlegada = Integer.parseInt(ruta.getHoraLlegada());
+    		int horaSalidaVuelo = Integer.parseInt(vuelos.get(i).getRuta().getHoraSalida());
+    		int horaLlegadaVuelo = Integer.parseInt(vuelos.get(i).getRuta().getHoraLlegada());
+    		if (vuelos.get(i).getFecha() == fecha && nombreAvion == avion.getNombre() && horaSalidaVuelo > horaSalida)
+    		{
+    			throw new Exception ("NO SE PROGRAMO EL VUELO");
+    		}
+    		else if (vuelos.get(i).getFecha() == fecha && nombreAvion == avion.getNombre() && horaLlegadaVuelo > horaLlegada)
+    		{
+    			throw new Exception ("NO SE PROGRAMO EL VUELO");
+    		}
+    		else 
+    		{
+    			Vuelo vuelo = new Vuelo (fecha,avion,ruta);
+    			vuelos.add(vuelo);
+    		}
+    	}
     }
 
     /**
@@ -303,7 +335,10 @@ public class Aerolinea
     public int venderTiquetes( String identificadorCliente, String fecha, String codigoRuta, int cantidad ) throws VueloSobrevendidoException, Exception
     {
         // TODO Implementar el método
-        return -1;
+    	Vuelo vuelo = getVuelo(fecha,codigoRuta);
+    	Cliente cliente = getCliente(identificadorCliente);
+    	CalculadoraTarifas calculadora = null;
+        return vuelo.venderTiquetes(cliente, calculadora, cantidad);
     }
 
     /**
@@ -314,6 +349,16 @@ public class Aerolinea
     public void registrarVueloRealizado( String fecha, String codigoRuta )
     {
         // TODO Implementar el método
+    	Vuelo vuelo = getVuelo(fecha,codigoRuta);
+    	ArrayList<Tiquete> tiquetes = (ArrayList<Tiquete>) vuelo.getTiquetes();
+    	if (vuelo != null)
+    	{
+	    	for (int i = 0; i< tiquetes.size() ; i++) 
+	    	{
+	    		tiquetes.get(i).marcarComoUsado();
+			}
+	    	vuelos.remove(vuelo);
+    	}
     }
 
     /**
@@ -324,7 +369,9 @@ public class Aerolinea
     public String consultarSaldoPendienteCliente( String identificadorCliente )
     {
         // TODO Implementar el método
-        return "";
+    	Cliente cliente = clientes.get(identificadorCliente);
+    	int totalTiquetesSinUsar = cliente.calcularValorTotalTiquetes();
+        return Integer.toString(totalTiquetesSinUsar);
     }
 
 }

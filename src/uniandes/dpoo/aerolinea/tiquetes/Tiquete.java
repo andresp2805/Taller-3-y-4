@@ -78,7 +78,7 @@ public class Tiquete
 	 */
 	public void marcarComoUsado()
 	{
-		
+		this.usado = true;
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class Tiquete
 	 */
 	public boolean esUsado()
 	{
-		return false;
+		return this.usado;
 	}
 	
 }

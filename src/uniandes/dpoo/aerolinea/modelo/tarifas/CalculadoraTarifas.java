@@ -1,5 +1,6 @@
 package uniandes.dpoo.aerolinea.modelo.tarifas;
 
+import uniandes.dpoo.aerolinea.modelo.Aeropuerto;
 import uniandes.dpoo.aerolinea.modelo.Ruta;
 import uniandes.dpoo.aerolinea.modelo.Vuelo;
 import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
@@ -29,7 +30,8 @@ public abstract class CalculadoraTarifas
 	 */
 	public int calcularTarifa(Vuelo vuelo, Cliente cliente)
 	{
-		return -1;
+		int tarifa = (int) (calcularCostoBase(vuelo,cliente) * calcularPorcentajeDescuento(cliente) + ValorImpuestos(calcularCostoBase(vuelo,cliente)));
+		return tarifa;
 	}
 	
 	/**
@@ -38,20 +40,14 @@ public abstract class CalculadoraTarifas
 	 * @param Cliente al que se le va a calcular el costo base.
 	 * @return Costo Base.
 	 */
-	protected int calcularCostoBase(Vuelo vuelo, Cliente cliente)
-	{
-		return -1;
-	}
+	protected abstract int calcularCostoBase(Vuelo vuelo, Cliente cliente);
 	
 	/**
 	 * 
 	 * @param Cliente al que se le va a calcular porcentaje de descuento.
 	 * @return El Porcentaje de Descuento
 	 */
-	protected double calcularPorcentajeDescuento(Cliente cliente)
-	{
-		return -1;
-	}
+	protected abstract double calcularPorcentajeDescuento(Cliente cliente);
 	
 	/**
 	 * 
@@ -60,7 +56,10 @@ public abstract class CalculadoraTarifas
 	 */
 	protected int calcularDistanciaVuelo(Ruta ruta)
 	{
-		return -1;
+		Aeropuerto origen = ruta.getOrigen();
+		Aeropuerto destino = ruta.getDestino();
+		int distancia = Aeropuerto.calcularDistancia(origen, destino);
+		return distancia;
 	}
 	
 	/**
@@ -70,6 +69,7 @@ public abstract class CalculadoraTarifas
 	 */
 	protected int ValorImpuestos(int costoBase)
 	{
-		return -1;
+		int impuesto = (int) (costoBase * IMPUESTO);
+		return impuesto;
 	}
 }
